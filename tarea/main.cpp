@@ -8,6 +8,8 @@
 #include "foo.h"
 // Puede validar su codigo con la siguiente funcion main
 int main(){
-
+    Matriz2D a();
+    Matriz2D b();
+   ;
     std::srand(time(nullptr));
 }

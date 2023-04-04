@@ -1,12 +1,11 @@
 #include "foo.h"
 
-Matriz2D::Matriz2D():filas(3),columnas(3){
+Matriz2D::Matriz2D():filas(3),columnas(3){ //yes
     // Constructor por defecto
     ptr = new float*[3];
     for (int i = 0; i < 3; i++) {
         ptr[i] = new float[3];
     }
-
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             ptr[i][j] = static_cast<double>(rand())/RAND_MAX;
@@ -14,7 +13,7 @@ Matriz2D::Matriz2D():filas(3),columnas(3){
     }
 }
 
-Matriz2D::Matriz2D(int n):filas(n),columnas(n){
+Matriz2D::Matriz2D(int n):filas(n),columnas(n){ //yes
     // Constructor con un parametro
     ptr = new float*[n];
     for (int i = 0; i < n; i++) {
@@ -29,7 +28,7 @@ Matriz2D::Matriz2D(int n):filas(n),columnas(n){
 
 }
 
-Matriz2D::Matriz2D(int n, int m):filas(n),columnas(m){
+Matriz2D::Matriz2D(int n, int m):filas(n),columnas(m){ //yes
     // Constructor con dos parametros
     ptr = new float*[n];
     for (int i = 0; i < n; i++) {
@@ -43,7 +42,7 @@ Matriz2D::Matriz2D(int n, int m):filas(n),columnas(m){
     }
 }
 
-Matriz2D::Matriz2D(const Matriz2D& m){
+Matriz2D::Matriz2D(const Matriz2D& m){ //yes
     // Constructor de copia
     this->filas= m.filas;
     this->columnas= m.columnas;
@@ -58,20 +57,19 @@ Matriz2D::Matriz2D(const Matriz2D& m){
     }
 }
 
-Matriz2D::Matriz2D(Matriz2D&& m) {
+Matriz2D::Matriz2D(Matriz2D&& m) {//NO
     // Constructor de movimiento
+    this->filas = m.filas;
+    this->columnas = m.columnas;
     ptr = new float*[filas];
     for(int i = 0; i < filas; i++){
         ptr[i] = new float[columnas];
     }
-
-    this->filas = filas;
-    this->columnas = columnas;
     ptr=m.ptr;
     m.ptr= nullptr;
 }
 
-Matriz2D t(Matriz2D& m){
+Matriz2D t(Matriz2D& m){//yes
     // Transpuesta de una matriz
     Matriz2D transpuesta(m.columnas, m.filas);
     for (int i = 0; i < m.columnas; i++) {
@@ -82,7 +80,7 @@ Matriz2D t(Matriz2D& m){
     return transpuesta;
 }
 
-std::ostream& operator<<(std::ostream& os, const Matriz2D& m){
+std::ostream& operator<<(std::ostream& os, const Matriz2D& m){//yes
     // Sobrecarga del operador <<
     for(int i = 0; i < m.filas; i++){
         for(int j = 0; j < m.columnas; j++){
@@ -92,7 +90,7 @@ std::ostream& operator<<(std::ostream& os, const Matriz2D& m){
     }
 }
 
-Matriz2D operator+(const Matriz2D& m1, const Matriz2D& m2) {
+Matriz2D operator+(const Matriz2D& m1, const Matriz2D& m2) {//yes
     // Sobrecarga del operador +
     Matriz2D Suma(m2.filas, m2.columnas);
     for (int i = 0; i < m2.filas; i++) {
@@ -103,7 +101,7 @@ Matriz2D operator+(const Matriz2D& m1, const Matriz2D& m2) {
     return Suma;
 }
 
-Matriz2D operator-(const Matriz2D& m1, const Matriz2D& m2) {
+Matriz2D operator-(const Matriz2D& m1, const Matriz2D& m2) {//yes
     // Sobrecarga del operador -
     Matriz2D Resta(m2.filas, m2.columnas);
     for (int i = 0; i < m2.filas; i++) {
@@ -114,7 +112,7 @@ Matriz2D operator-(const Matriz2D& m1, const Matriz2D& m2) {
     return Resta;
 }
 
-Matriz2D operator*(const Matriz2D& m1, const Matriz2D& m2) {
+Matriz2D operator*(const Matriz2D& m1, const Matriz2D& m2) { //no
     // Sobrecarga del operador *
     Matriz2D Suma(m2.filas, m2.columnas);
     for (int i = 0; i < m2.filas; i++) {
@@ -125,7 +123,7 @@ Matriz2D operator*(const Matriz2D& m1, const Matriz2D& m2) {
     return Suma;
 }
 
-    Matriz2D operator+(const Matriz2D &m, float n) {
+    Matriz2D operator+(const Matriz2D &m, float n) {//yes
         // Sobrecarga del operador +
         Matriz2D Suma2(m.filas, m.columnas);
         for (int i = 0; i < m.filas; i++) {
@@ -136,7 +134,7 @@ Matriz2D operator*(const Matriz2D& m1, const Matriz2D& m2) {
         return Suma2;
     }
 
-    Matriz2D operator-(const Matriz2D &m, float n) {
+    Matriz2D operator-(const Matriz2D &m, float n) {//yes
         // Sobrecarga del operador -
         Matriz2D Resta2(m.filas, m.columnas);
         for (int i = 0; i < m.filas; i++) {
@@ -147,7 +145,7 @@ Matriz2D operator*(const Matriz2D& m1, const Matriz2D& m2) {
         return Resta2;
     }
 
-Matriz2D operator*(const Matriz2D& m, float n){
+Matriz2D operator*(const Matriz2D& m, float n){//yes
     // Sobrecarga del operador *
     Matriz2D Multi2(m.filas, m.columnas);
     for (int i = 0; i < m.filas; i++) {
@@ -158,12 +156,13 @@ Matriz2D operator*(const Matriz2D& m, float n){
     return Multi2;
 }
 
-Matriz2D operator/(const Matriz2D& m, float n){
+Matriz2D operator/(const Matriz2D& m, float n){//no
     // Sobrecarga del operador /
     Matriz2D Divi2(m.filas, m.columnas);
     for (int i = 0; i < m.filas; i++) {
         for (int j = 0; j < m.columnas; j++) {
-            Divi2.ptr[i][j] = m.ptr[i][j] / n;
+            Divi2.ptr[i][j] = static_cast<double> (m.ptr[i][j] / n);
+            cout<< Divi2.ptr[i][j];
         }
     }
     return Divi2;
