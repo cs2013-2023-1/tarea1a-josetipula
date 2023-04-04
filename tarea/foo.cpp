@@ -4,9 +4,12 @@ Matriz2D::Matriz2D():filas(3),columnas(3){
     // Constructor por defecto
     ptr = new float*[3];
     for (int i = 0; i < 3; i++) {
-        ptr [i] = new float[3];
+        ptr[i] = new float[3];
+    }
+
+    for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-            ptr [i][j] = static_cast<double>(rand())/RAND_MAX;
+            ptr[i][j] = static_cast<double>(rand())/RAND_MAX;
         }
     }
 }
