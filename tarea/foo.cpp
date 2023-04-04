@@ -19,7 +19,7 @@ Matriz2D::Matriz2D(int n):filas(n),columnas(n){ //yes
     for (int i = 0; i < n; i++) {
         ptr[i] = new float[n];
     }
-//comentario
+
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             ptr[i][j] = static_cast<double>(rand())/RAND_MAX;
@@ -57,7 +57,7 @@ Matriz2D::Matriz2D(const Matriz2D& m){ //yes
     }
 }
 
-Matriz2D::Matriz2D(Matriz2D&& m) {//NO
+Matriz2D::Matriz2D(Matriz2D&& m) {//YES
     // Constructor de movimiento
     this->filas = m.filas;
     this->columnas = m.columnas;
@@ -114,13 +114,16 @@ Matriz2D operator-(const Matriz2D& m1, const Matriz2D& m2) {//yes
 
 Matriz2D operator*(const Matriz2D& m1, const Matriz2D& m2) { //no
     // Sobrecarga del operador *
-    Matriz2D Suma(m2.filas, m2.columnas);
-    for (int i = 0; i < m2.filas; i++) {
+    Matriz2D Multi(m1.filas, m2.columnas);
+    for (int i = 0; i < m1.filas; i++) {
         for (int j = 0; j < m2.columnas; j++) {
-            Suma.ptr[i][j] = m1.ptr[i][j] * m2.ptr[i][j];
+            Multi.ptr[i][j] = 0;
+            for (int k = 0; k < m1.columnas; k++) {
+                Multi.ptr[i][j] += m1.ptr[i][k] * m2.ptr[k][j];
+            }
         }
     }
-    return Suma;
+    return Multi;
 }
 
     Matriz2D operator+(const Matriz2D &m, float n) {//yes

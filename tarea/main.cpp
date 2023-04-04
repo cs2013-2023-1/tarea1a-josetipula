@@ -10,6 +10,6 @@
 int main(){
     Matriz2D a();
     Matriz2D b();
-   ;
+
     std::srand(time(nullptr));
 }
