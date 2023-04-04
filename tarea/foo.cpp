@@ -19,7 +19,7 @@ Matriz2D::Matriz2D(int n):filas(n),columnas(n){ //yes
     for (int i = 0; i < n; i++) {
         ptr[i] = new float[n];
     }
-
+//comentario
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             ptr[i][j] = static_cast<double>(rand())/RAND_MAX;
