@@ -89,6 +89,7 @@ std::ostream& operator<<(std::ostream& os, const Matriz2D& m){//yes
         os << endl;
     }
     cout<<endl;
+    return os;
 }
 
 Matriz2D operator+(const Matriz2D& m1, const Matriz2D& m2) {//yes
@@ -162,7 +163,14 @@ Matriz2D operator*(const Matriz2D& m, float n){//yes
 
 Matriz2D operator/(const Matriz2D& m, float n){//no
     // Sobrecarga del operador /
-    cout<<"no";
+    Matriz2D Divi2(m.filas, m.columnas);
+    for (int i = 0; i < m.filas; i++) {
+        for (int j = 0; j < m.columnas; j++) {
+
+            Divi2.ptr[i][j] =  m.ptr[i][j] / n;
+        }
+    }
+    return Divi2;
 }
 
 float Matriz2D::get(int i, int j){
